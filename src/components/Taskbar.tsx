@@ -3,9 +3,11 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useAppContext } from '../hooks/useAppContext';
 import { APPS } from '../apps/index';
 import { Icon } from './Icon';
+import { DurgasAssistantIcon } from '../constants';
+
 
 export const Taskbar: React.FC<{ onToggleStartMenu: () => void }> = ({ onToggleStartMenu }) => {
-  const { windows } = useAppContext();
+  const { windows, activateAssistant } = useAppContext();
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -24,6 +26,9 @@ export const Taskbar: React.FC<{ onToggleStartMenu: () => void }> = ({ onToggleS
       <div className="flex items-center gap-2">
         <button onClick={onToggleStartMenu} className="h-10 w-10 flex items-center justify-center hover:bg-white/20 rounded">
             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 48 48" className="w-6 h-6"><path d="M6 38h14V24H6v14zm0-16h14V8H6v14zm16 16h14V24H22v14zm0-16h14V8H22v14z"/></svg>
+        </button>
+        <button onClick={activateAssistant} className="h-10 w-10 flex items-center justify-center hover:bg-white/20 rounded">
+            <div className="w-6 h-6"><DurgasAssistantIcon /></div>
         </button>
         {openWindowApps.map(app => (
             <Icon key={app.id} app={app} type="taskbar" />

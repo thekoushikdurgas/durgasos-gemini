@@ -5,6 +5,7 @@ import { Desktop } from './Desktop';
 import { Window } from './Window';
 import { Taskbar } from './Taskbar';
 import { StartMenu } from './StartMenu';
+import { DurgasAssistant } from './DurgasAssistant';
 
 export const OSInterface: React.FC = () => {
     const { windows, theme, accentColor } = useAppContext();
@@ -20,6 +21,7 @@ export const OSInterface: React.FC = () => {
             {windows.map(win => <Window key={win.id} win={win} />)}
             <Taskbar onToggleStartMenu={() => setStartMenuOpen(v => !v)} />
             {startMenuOpen && <StartMenu onClose={() => setStartMenuOpen(false)} />}
+            <DurgasAssistant />
         </div>
     );
 };

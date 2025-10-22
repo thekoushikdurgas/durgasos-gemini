@@ -6,13 +6,18 @@ import { useAppContext } from '../hooks/useAppContext';
 export const Icon: React.FC<{ app: AppDefinition; type: 'desktop' | 'start-menu' | 'taskbar' }> = ({ app, type }) => {
   const { openApp, windows, focusApp } = useAppContext();
   
+  const handleTaskbarClick = () => {
+    const win = windows.find(w => w.appId === app.id);
+    if (win) {
+      focusApp(win.id);
+    } else {
+      openApp(app.id);
+    }
+  };
+
   const commonProps = {
     onDoubleClick: type === 'desktop' ? () => openApp(app.id) : undefined,
-    onClick: type !== 'desktop' ? () => {
-        const win = windows.find(w => w.appId === app.id);
-        if(win) focusApp(win.id);
-        else openApp(app.id);
-    } : undefined,
+    onClick: type === 'start-menu' ? () => openApp(app.id) : (type === 'taskbar' ? handleTaskbarClick : undefined),
   };
 
   if (type === 'desktop') {

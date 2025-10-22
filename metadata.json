@@ -1,0 +1,7 @@
+{
+  "name": "DurgasOS - The Gemini Powered Desktop",
+  "description": "A web-based Windows 11 desktop simulator that replicates the complete Windows 11 experience, including a boot sequence, desktop environment, and interactive applications powered by the Gemini API.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

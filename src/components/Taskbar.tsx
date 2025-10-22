@@ -1,20 +1,30 @@
-
+/**
+ * @file Defines the Taskbar component, the main navigation bar of the OS.
+ */
 import React, { useState, useEffect, useMemo } from 'react';
 import { useAppContext } from '../hooks/useAppContext';
 import { APPS } from '../apps/index';
 import { Icon } from './Icon';
 import { DurgasAssistantIcon } from '../constants';
 
-
+/**
+ * The Taskbar component displays the Start Menu button, Assistant button,
+ * icons for open applications, and the system clock.
+ * @param {object} props - The component props.
+ * @param {() => void} props.onToggleStartMenu - Callback to open or close the Start Menu.
+ * @returns {React.ReactElement} The rendered taskbar.
+ */
 export const Taskbar: React.FC<{ onToggleStartMenu: () => void }> = ({ onToggleStartMenu }) => {
   const { windows, activateAssistant } = useAppContext();
   const [time, setTime] = useState(new Date());
 
+  // Effect to update the clock.
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000 * 30); // Update every 30s
     return () => clearInterval(timer);
   }, []);
 
+  // Memoized list of currently open applications to display on the taskbar.
   const openWindowApps = useMemo(() => {
       const appIds = new Set(windows.map(w => w.appId));
       return APPS.filter(app => appIds.has(app.id));

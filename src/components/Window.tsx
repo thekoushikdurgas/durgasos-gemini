@@ -1,9 +1,18 @@
-
+/**
+ * @file Defines the Window component, which acts as a container for all applications.
+ */
 import React, { useRef, useEffect, useCallback } from 'react';
 import { useAppContext } from '../hooks/useAppContext';
 import { WindowInstance } from '../types';
 import { APPS } from '../apps/index';
 
+/**
+ * The Window component provides a draggable, resizable, and focusable container
+ * that renders the content of a specific application.
+ * @param {object} props - The component props.
+ * @param {WindowInstance} props.win - The state object for this window instance.
+ * @returns {React.ReactElement | null} The rendered window or null if the app is not found.
+ */
 export const Window: React.FC<{ win: WindowInstance }> = ({ win }) => {
   const { closeApp, minimizeApp, focusApp, updateWindow, activeWindowId } = useAppContext();
   const isActive = win.id === activeWindowId;
@@ -13,6 +22,7 @@ export const Window: React.FC<{ win: WindowInstance }> = ({ win }) => {
   const draggingRef = useRef<boolean>(false);
   const initialPosRef = useRef<any>({ x: 0, y: 0, mouseX: 0, mouseY: 0 });
 
+  /** Starts the dragging process for the window. */
   const handleDragStart = useCallback((e: React.MouseEvent) => {
     focusApp(win.id);
     if (!headerRef.current || !windowRef.current || (e.target instanceof HTMLElement && e.target.closest('button'))) return;
@@ -22,6 +32,7 @@ export const Window: React.FC<{ win: WindowInstance }> = ({ win }) => {
     initialPosRef.current = { x: left, y: top, mouseX: e.clientX, mouseY: e.clientY };
   }, [win.id, focusApp]);
 
+  /** Starts the resizing process for the window. */
   const handleResizeStart = useCallback((e: React.MouseEvent, type: string) => {
     e.stopPropagation();
     focusApp(win.id);
@@ -32,6 +43,7 @@ export const Window: React.FC<{ win: WindowInstance }> = ({ win }) => {
     initialPosRef.current = { x: left, y: top, mouseX: e.clientX, mouseY: e.clientY, width, height };
   }, [win.id, focusApp]);
   
+  // Effect to handle mouse move events for dragging and resizing.
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (draggingRef.current) {

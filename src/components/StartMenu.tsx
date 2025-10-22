@@ -1,15 +1,25 @@
-
+/**
+ * @file Defines the Start Menu component, which provides app launching and search functionality.
+ */
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../hooks/useAppContext';
 import { APPS } from '../apps/index';
 import { AppDefinition, FileSystemNode } from '../types';
 import { Icon } from './Icon';
 
+/**
+ * The Start Menu component.
+ * Features a search bar for apps and files, a grid of pinned apps, and a recommended section.
+ * @param {object} props - The component props.
+ * @param {() => void} props.onClose - Callback to close the start menu.
+ * @returns {React.ReactElement} The rendered start menu.
+ */
 export const StartMenu: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     const { openApp, fileSystem } = useAppContext();
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState<{apps: AppDefinition[], files: FileSystemNode[]}>({apps: [], files: []});
 
+    // Effect to perform search whenever the query changes.
     useEffect(() => {
         if (!searchQuery.trim()) {
             setSearchResults({ apps: [], files: [] });

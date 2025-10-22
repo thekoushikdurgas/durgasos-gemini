@@ -18,8 +18,13 @@ import { Loader } from '../components/ui/Loader';
 
 // =================================================================================================
 // App: About Me
+// A simple application that displays information about DurgasOS.
 // =================================================================================================
 
+/**
+ * The About Me application component. Displays a welcome message and a brief overview of the OS.
+ * @returns {React.ReactElement}
+ */
 export const AboutMeApp: React.FC = () => (
     <AppContainer>
         <Title>About DurgasOS</Title>
@@ -31,8 +36,13 @@ export const AboutMeApp: React.FC = () => (
 
 // =================================================================================================
 // App: Portfolio
+// Displays information about the technical skills demonstrated in the project.
 // =================================================================================================
 
+/**
+ * The Portfolio application component. Lists the key technologies and concepts used to build DurgasOS.
+ * @returns {React.ReactElement}
+ */
 export const PortfolioApp: React.FC = () => (
     <AppContainer>
         <Title>Portfolio</Title>
@@ -49,8 +59,15 @@ export const PortfolioApp: React.FC = () => (
 
 // =================================================================================================
 // App: Gemini Chat
+// A chat application that allows users to converse with various Gemini models.
 // =================================================================================================
 
+/**
+ * The main component for the Gemini Chat application.
+ * Manages chat history, user input, model selection, and API communication.
+ * It also includes a text-to-speech feature to read out Gemini's responses.
+ * @returns {React.ReactElement} The Gemini Chat application component.
+ */
 export const GeminiChatApp: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
@@ -134,8 +151,14 @@ export const GeminiChatApp: React.FC = () => {
 
 // =================================================================================================
 // App: Creator Studio
+// A multi-functional tool for generating and editing images, analyzing content, and transcribing audio.
 // =================================================================================================
 
+/**
+ * The Creator Studio application component.
+ * Provides a tab-based interface for various Gemini multimedia functionalities.
+ * @returns {React.ReactElement}
+ */
 export const CreatorStudioApp: React.FC = () => {
     const [activeTab, setActiveTab] = useState('generate-image');
     const [prompt, setPrompt] = useState('');
@@ -254,8 +277,14 @@ export const CreatorStudioApp: React.FC = () => {
 
 // =================================================================================================
 // App: Live Assistant
+// An application for real-time, low-latency voice conversations with Gemini.
 // =================================================================================================
 
+/**
+ * The Live Assistant application component.
+ * Provides a simple UI to start and stop a voice conversation and displays the live transcripts.
+ * @returns {React.ReactElement}
+ */
 export const LiveAssistantApp: React.FC = () => {
     const { isSessionActive, startSession, stopSession, transcripts, currentInput, currentOutput } = useAppContext();
     
@@ -284,8 +313,15 @@ export const LiveAssistantApp: React.FC = () => {
 
 // =================================================================================================
 // App: Gemini Browser
+// A web browser that uses Gemini with Google Search grounding for up-to-date answers.
 // =================================================================================================
 
+/**
+ * The Gemini Browser application component.
+ * Allows users to make queries that are grounded in Google Search or Google Maps data.
+ * Displays the response and the sources used by the model.
+ * @returns {React.ReactElement}
+ */
 export const BrowserApp: React.FC = () => {
     const [query, setQuery] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -340,8 +376,14 @@ export const BrowserApp: React.FC = () => {
 
 // =================================================================================================
 // App: Settings
+// Allows users to customize the appearance of the OS.
 // =================================================================================================
 
+/**
+ * The Settings application component.
+ * Provides controls for changing the system theme, accent color, and wallpaper.
+ * @returns {React.ReactElement}
+ */
 export const SettingsApp: React.FC = () => {
     const { theme, setTheme, wallpaper, setWallpaper, accentColor, setAccentColor } = useAppContext();
 
@@ -387,8 +429,16 @@ export const SettingsApp: React.FC = () => {
 
 // =================================================================================================
 // App: File Explorer
+// A basic file manager for navigating the virtual file system.
 // =================================================================================================
 
+/**
+ * The File Explorer application component.
+ * Allows for browsing folders, viewing files, creating new folders, renaming, and deleting items.
+ * @param {object} props - The component props.
+ * @param {string} [props.initialPath] - An optional path to open the explorer to.
+ * @returns {React.ReactElement}
+ */
 export const FileExplorerApp: React.FC<{ initialPath?: string }> = ({ initialPath }) => {
     const { fileSystem, openApp, updateFileSystem, renameFileSystemNode, deleteFileSystemNode } = useAppContext();
     const [currentPath, setCurrentPath] = useState<string[]>(initialPath ? initialPath.split('/').filter(p => p) : []);
@@ -581,8 +631,16 @@ export const FileExplorerApp: React.FC<{ initialPath?: string }> = ({ initialPat
 
 // =================================================================================================
 // App: Notepad
+// A simple, read-only text file viewer.
 // =================================================================================================
 
+/**
+ * The Notepad application component. Displays the content of a text file.
+ * @param {object} props - The component props.
+ * @param {string} [props.content='This file is empty.'] - The text content to display.
+ * @param {string} [props.title='Untitled'] - The title of the file.
+ * @returns {React.ReactElement}
+ */
 export const NotepadApp: React.FC<{ content?: string, title?: string }> = ({ content = 'This file is empty.', title = 'Untitled' }) => {
     return (
         <AppContainer>
@@ -597,8 +655,14 @@ export const NotepadApp: React.FC<{ content?: string, title?: string }> = ({ con
 
 // =================================================================================================
 // App: Terminal
+// A command-line interface for interacting with the virtual file system.
 // =================================================================================================
 
+/**
+ * The Terminal application component.
+ * Emulates a basic command-line interface with commands like `ls`, `cd`, `cat`, etc.
+ * @returns {React.ReactElement}
+ */
 export const TerminalApp: React.FC = () => {
     const { fileSystem } = useAppContext();
     const [history, setHistory] = useState<React.ReactNode[]>(['Welcome to DurgasOS Terminal.', 'Type "help" for a list of commands.']);
@@ -727,8 +791,17 @@ export const TerminalApp: React.FC = () => {
 
 // =================================================================================================
 // App: Video Player
+// A simple media player for video files found in the file system.
 // =================================================================================================
 
+/**
+ * The Video Player application component.
+ * Plays base64-encoded video files and provides basic playback controls.
+ * @param {object} props - The component props.
+ * @param {string} [props.content=''] - The base64 content of the video file.
+ * @param {string} [props.title='Video Player'] - The title of the video.
+ * @returns {React.ReactElement}
+ */
 export const VideoPlayerApp: React.FC<{ content: string, title: string }> = ({ content = '', title = 'Video Player' }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);

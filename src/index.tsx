@@ -1,4 +1,7 @@
-
+/**
+ * @file The main entry point for the DurgasOS React application.
+ * It finds the root DOM element and renders the main App component into it.
+ */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

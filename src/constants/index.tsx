@@ -1,8 +1,14 @@
-
+/**
+ * @file This file contains all the static data and constants used throughout the DurgasOS.
+ * This includes UI elements like icons, default application states, theme options, and the initial file system structure.
+ */
 import React from 'react';
 import type { WindowInstance, AccentColor, FileSystemNode } from '../types';
 
-// ICONS (as JSX)
+// =================================================================================================
+// SECTION: Application Icons
+// Defines the SVG icons used for each application. These are functional components for easy styling.
+// =================================================================================================
 export const AboutIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="text-cyan-400" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>;
 export const PortfolioIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="text-green-400" viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg>;
 export const GeminiChatIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="text-purple-400" viewBox="0 0 24 24"><path d="M15 4v16l-2-2-2 2-2-2-2 2-2-2-3 3V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2z"/></svg>;
@@ -16,8 +22,10 @@ export const TerminalIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="
 export const DurgasAssistantIcon = () => <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="text-white w-full h-full"><circle cx="50" cy="50" r="32" stroke="cyan" strokeWidth="6" fill="none" /><circle cx="50" cy="50" r="18" fill="cyan" /></svg>;
 export const VideoPlayerIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="text-rose-500" viewBox="0 0 24 24"><path d="M10 16.5v-9l6 4.5-6 4.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>;
 
-
-// INITIAL STATE
+// =================================================================================================
+// SECTION: Initial State
+// Defines the default state for windows when the OS boots up.
+// =================================================================================================
 export const defaultWindows: WindowInstance[] = [
   {
     id: 'win-1',
@@ -31,7 +39,12 @@ export const defaultWindows: WindowInstance[] = [
   },
 ];
 
-// SETTINGS CONSTANTS
+// =================================================================================================
+// SECTION: Settings Constants
+// Defines the available options for personalization in the Settings app.
+// =================================================================================================
+
+/** An array of available wallpapers. */
 export const WALLPAPERS = [
     { name: "Flow", url: "https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=1932&auto=format&fit=crop" },
     { name: "Glow", url: "https://images.unsplash.com/photo-1541278127399-63a238713364?q=80&w=1974&auto=format&fit=crop" },
@@ -39,6 +52,7 @@ export const WALLPAPERS = [
     { name: "Abstract", url: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?q=80&w=1887&auto=format&fit=crop" }
 ];
 
+/** An array of available accent colors. */
 export const ACCENT_COLORS: AccentColor[] = [
     { name: "Default Blue", hex: "#0078D4" },
     { name: "Orchid", hex: "#DA70D6" },
@@ -47,7 +61,10 @@ export const ACCENT_COLORS: AccentColor[] = [
     { name: "Ruby", hex: "#E0115F" },
 ];
 
-// FILE SYSTEM
+// =================================================================================================
+// SECTION: Initial File System
+// Defines the default folder and file structure for the File Explorer.
+// =================================================================================================
 export const initialFileSystem: FileSystemNode = {
     id: 'root',
     name: 'C:',

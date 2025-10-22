@@ -1,8 +1,16 @@
-
+/**
+ * @file Defines the UI component for the Durgas Assistant, visualizing its state.
+ */
 import React from 'react';
 import { useAppContext } from '../hooks/useAppContext';
 import { DurgasAssistantIcon } from '../constants';
 
+/**
+ * The UI for the Durgas voice assistant.
+ * It appears when the assistant is active (listening, thinking, speaking, or in an error state)
+ * and provides visual feedback to the user. It also displays the current transcript.
+ * @returns {React.ReactElement | null} The assistant UI or null if idle.
+ */
 export const DurgasAssistant: React.FC = () => {
     const { assistantState, assistantTranscript } = useAppContext();
 
@@ -10,6 +18,7 @@ export const DurgasAssistant: React.FC = () => {
         return null;
     }
 
+    /** Determines the CSS classes for the orb based on the assistant's state. */
     const getStateStyles = () => {
         switch (assistantState) {
             case 'listening':
@@ -25,6 +34,7 @@ export const DurgasAssistant: React.FC = () => {
         }
     };
     
+    /** Gets the status message corresponding to the assistant's state. */
     const getStateMessage = () => {
         switch (assistantState) {
              case 'listening': return 'Listening...';

@@ -1,11 +1,21 @@
-
+/**
+ * @file Defines a reusable Icon component for apps on the desktop, start menu, and taskbar.
+ */
 import React from 'react';
 import { AppDefinition } from '../types';
 import { useAppContext } from '../hooks/useAppContext';
 
+/**
+ * A versatile Icon component that adapts its appearance and behavior based on its location.
+ * @param {object} props - The component props.
+ * @param {AppDefinition} props.app - The definition of the application this icon represents.
+ * @param {'desktop' | 'start-menu' | 'taskbar'} props.type - The context in which the icon is displayed.
+ * @returns {React.ReactElement} The rendered icon component.
+ */
 export const Icon: React.FC<{ app: AppDefinition; type: 'desktop' | 'start-menu' | 'taskbar' }> = ({ app, type }) => {
   const { openApp, windows, focusApp } = useAppContext();
   
+  /** Handles clicks on taskbar icons, focusing the app if open, or opening it if closed. */
   const handleTaskbarClick = () => {
     const win = windows.find(w => w.appId === app.id);
     if (win) {
